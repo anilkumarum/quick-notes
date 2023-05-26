@@ -1,11 +1,11 @@
 {
-	"name": "quick-notes",
+	"name": "quick-sticky-notes",
 	"displayName": "Quick Sticky Notes",
 	"version": "0.0.1",
 	"description": "quick sticky notes",
 	"publisher": "anilkumarum",
 	"license": "GPL-3.0-only",
-	"icon": "logo.jpeg",
+	"icon": "logo.png",
 	"galleryBanner": {
 		"color": "#9904be",
 		"theme": "dark"
@@ -40,22 +40,27 @@
 		"commands": [
 			{
 				"command": "quicknotes.openNotes",
-				"title": "open quick notes",
+				"title": "Open quick notes",
 				"category": "Notes"
 			},
 			{
 				"command": "quicknotes.openDefaultNotes",
-				"title": "quick notes",
+				"title": "Quick notes",
 				"category": "Notes"
 			},
 			{
 				"command": "quicknotes.openDailyNotes",
-				"title": "open quick daily notes",
+				"title": "Open quick daily notes",
 				"category": "Notes"
 			},
 			{
 				"command": "quicknotes.addNewNote",
-				"title": "create new note",
+				"title": "Create new note",
+				"category": "Notes"
+			},
+			{
+				"command": "quicknotes.changeNotesFolder",
+				"title": "Change Quick notes folder",
 				"category": "Notes"
 			}
 		],
@@ -88,6 +93,11 @@
 						"Default"
 					],
 					"default": "Last Note",
+					"description": "open default note when click on status bar"
+				},
+				"quicknotes.config.notesFolderList": {
+					"type": "array",
+					"default": [],
 					"description": "open default note when click on status bar"
 				}
 			}

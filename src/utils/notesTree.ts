@@ -1,5 +1,4 @@
 import { readdir } from "node:fs/promises";
-import { userConfig } from "./config.js";
 
 class FilePath {
 	id;

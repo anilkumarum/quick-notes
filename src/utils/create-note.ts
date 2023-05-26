@@ -1,6 +1,7 @@
 import { join } from "node:path";
 import { userConfig } from "./config.js";
 import { access, constants, mkdir, rename, writeFile } from "node:fs/promises";
+import statusBar from "./status-bar.js";
 
 export async function getDailyNotePath() {
 	const dailyFolder = join(userConfig.notesLocation, "daily-notes");
@@ -38,6 +39,7 @@ export async function getNewNotePath() {
 	const noteFolder = userConfig.notesLocation;
 	const newFilePath = join(noteFolder, new Date().toISOString().slice(0, -8) + ".md");
 	await writeFile(newFilePath, "# first line is file name").catch((err) => console.error(err));
+	statusBar.setToolTip();
 	return newFilePath;
 }
 

@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
-import "./utils/status-bar.js";
+import { changeFolder, userConfig } from "./utils/config.js";
 import { join } from "path";
-import { userConfig } from "./utils/config.js";
 import { getDailyNotePath, getNewNotePath } from "./utils/create-note.js";
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -27,7 +26,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	function defaultHandler() {
 		if (userConfig.defaultNotes === "Last Note") {
 			const notePath: string = storeDb.get("lastNote");
-			openNote(notePath);
+			notePath ? openNote(notePath) : addNewNote();
 		} else if (userConfig.defaultNotes === "Daily Notes") {
 			vscode.commands.executeCommand("quicknotes.openDailyNotes");
 		}
@@ -48,11 +47,14 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	const disposableNotesFolder = vscode.commands.registerCommand("quicknotes.openNotesFolder", folderHandler);
 
+	const disposableChangeFolder = vscode.commands.registerCommand("quicknotes.changeNotesFolder", changeFolder);
+
 	context.subscriptions.push(disposableNotesFolder);
 	context.subscriptions.push(disposableQuickNotes);
 	context.subscriptions.push(disposableDefaultNotes);
 	context.subscriptions.push(disposableNewNote);
 	context.subscriptions.push(disposableDailyNotes);
+	context.subscriptions.push(disposableChangeFolder);
 
 	async function openNote(notePath: string) {
 		try {
