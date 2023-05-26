@@ -1,0 +1,105 @@
+{
+	"name": "quick-notes",
+	"displayName": "Quick Sticky Notes",
+	"version": "0.0.1",
+	"description": "quick sticky notes",
+	"publisher": "anilkumarum",
+	"license": "GPL-3.0-only",
+	"icon": "logo.jpeg",
+	"galleryBanner": {
+		"color": "#9904be",
+		"theme": "dark"
+	},
+	"preview": true,
+	"bugs": {
+		"url": "https://github.com/anilkumarum/quick-notes/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/anilkumarum/quick-notes"
+	},
+	"author": {
+		"name": "anilkumarum",
+		"url": "https://github.com/anilkumarum"
+	},
+	"engines": {
+		"vscode": "^1.77.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"notes",
+		"sticky notes"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "quicknotes.openNotes",
+				"title": "open quick notes",
+				"category": "Notes"
+			},
+			{
+				"command": "quicknotes.openDefaultNotes",
+				"title": "quick notes",
+				"category": "Notes"
+			},
+			{
+				"command": "quicknotes.openDailyNotes",
+				"title": "open quick daily notes",
+				"category": "Notes"
+			},
+			{
+				"command": "quicknotes.addNewNote",
+				"title": "create new note",
+				"category": "Notes"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "quicknotes.openDefaultNotes",
+				"key": "ctrl+alt+n",
+				"when": "editorTextFocus",
+				"mac": "cmd+option+n"
+			}
+		],
+		"configuration": {
+			"title": "Live Preview",
+			"properties": {
+				"quicknotes.config.notesLocation": {
+					"type": "string",
+					"default": null,
+					"description": "set notes location. Default path is home"
+				},
+				"quicknotes.config.showFolderLocation": {
+					"type": "boolean",
+					"default": false,
+					"description": "show 'open notes folder' options in status tooltip"
+				},
+				"quicknotes.config.defaultNotes": {
+					"enum": [
+						"Last Note",
+						"Daily Notes",
+						"New Note",
+						"Default"
+					],
+					"default": "Last Note",
+					"description": "open default note when click on status bar"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"bundle": "esbuild ./src/extension.js --bundle --minify --outfile=./out/extension.js --external:vscode --format=cjs --platform=node"
+	},
+	"devDependencies": {
+		"@types/node": "^16.18.25",
+		"@types/vscode": "^1.77.0"
+	}
+}
